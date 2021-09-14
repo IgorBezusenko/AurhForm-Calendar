@@ -8,13 +8,13 @@ import {useAction} from "./hooks/useAction";
 import {IUser} from "./models/IUser";
 
 const App: FC = () => {
-    const {setUser,setAuth} = useAction()
-    useEffect(()=>{
-        if (localStorage.getItem("auth")){
-            setUser({username:localStorage.getItem("username" || "")} as IUser)
+    const {setUser, setAuth, setEvents} = useAction()
+    useEffect(() => {
+        if (localStorage.getItem("auth")) {
+            setUser({username: localStorage.getItem("username" || "")} as IUser)
             setAuth(true)
         }
-    },[])
+    }, [])
     return (
         <Layout>
             <NavBar/>

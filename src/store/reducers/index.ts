@@ -1,5 +1,7 @@
 import {authReducer} from "./auth";
+import {eventReducer} from "./event";
 
 export const reducers = {
-    auth: authReducer
+    auth: authReducer,
+    event: eventReducer
 }

@@ -13,21 +13,25 @@ export const NavBar: FC = () => {
         <>
             <Layout.Header>
               <Row justify={"end"}>
-                  <Col flex="0 1 100px">
+                  <>
                       {isAuth ?
-                          <>
-                              <div style={{color: "white"}}>{user.username}</div>
-                              <Menu theme="dark" mode="horizontal" selectable={false}>
-                                  <Menu.Item onClick={logout} key={1}>Выйти</Menu.Item>
-                              </Menu>
-                          </>
-                          :
-                          <Menu theme="dark" mode="horizontal" selectable={false}>
+                             <>
+                                 <Col span={2} style={{color: "white", textAlign:"center"}}>{user.username}</Col>
+                                 <Col span={2}>
+                                     <Menu theme="dark" mode="horizontal" selectable={false}>
+                                         <Menu.Item onClick={logout} key={1}>Выйти</Menu.Item>
+                                     </Menu>
+                                 </Col>
+                             </>
 
-                              <Menu.Item onClick={() => router.push(RouteNames.LOGIN)} key={2}>Login</Menu.Item>
-                          </Menu>
+                          :
+                         <Col span={2}>
+                             <Menu theme="dark" mode="horizontal" selectable={false}>
+                                 <Menu.Item onClick={() => router.push(RouteNames.LOGIN)} key={2}>Login</Menu.Item>
+                             </Menu>
+                         </Col>
                       }
-                  </Col>
+                  </>
 
               </Row>
             </Layout.Header>

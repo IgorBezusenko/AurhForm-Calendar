@@ -1,7 +1,7 @@
 import {IUser} from "../../../models/IUser";
 import {AuthActionEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction} from "./types";
 import {AppDispatch} from "../../index";
-import axios from "axios";
+import UserServer from "../../../api/UserServer";
 
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({type: AuthActionEnum.SET_USER, payload: user}),
@@ -17,13 +17,13 @@ export const AuthActionCreators = {
             dispatch(AuthActionCreators.setIsLoading(true))
             dispatch(AuthActionCreators.setError(""))
             setTimeout(async () => {
-                const response = await axios.get<IUser[]>("./users.json")
+                const response = await UserServer.getUsers()
                 const mockUser = response.data.find((user) => user.username === username && user.password === password)
                 if (mockUser) {
                     localStorage.setItem("auth", "true")
                     localStorage.setItem("username", mockUser.username)
-                    dispatch(AuthActionCreators.setAuth(true))
                     dispatch(AuthActionCreators.setUser(mockUser))
+                    dispatch(AuthActionCreators.setAuth(true))
                 } else {
                     dispatch(AuthActionCreators.setError("Не верный логин или пароль"))
                 }
